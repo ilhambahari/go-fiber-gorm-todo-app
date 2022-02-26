@@ -1,0 +1,13 @@
+func initDatabase() {
+    var err error
+    database.DBConn, err := gorm.Open(mysql.Open(todos.db), &gorm.Config{})
+
+    if err != nil {
+        panic("Failed to connect database")
+    }
+
+    fmt.Println("Database successfully connected")
+
+    database.DBConn.AutoMigrate(&todos.Todo{})
+    fmt.Println("Database Migrated")
+}
